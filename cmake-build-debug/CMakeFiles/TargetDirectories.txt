@@ -1,0 +1,3 @@
+/Users/fsfaysalcse/CLionProjects/taylorsC++Group/cmake-build-debug/CMakeFiles/taylorsC__Group.dir
+/Users/fsfaysalcse/CLionProjects/taylorsC++Group/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/fsfaysalcse/CLionProjects/taylorsC++Group/cmake-build-debug/CMakeFiles/rebuild_cache.dir

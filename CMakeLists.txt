@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.23)
+project(taylorsC__Group)
+
+set(CMAKE_CXX_STANDARD 14)
+
+add_executable(taylorsC__Group main.cpp TextTable.h colors.h)
