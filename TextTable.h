@@ -15,8 +15,11 @@
 
 class TextTable {
 public:
-    enum class Alignment { LEFT, RIGHT };
+    enum class Alignment {
+        LEFT, RIGHT
+    };
     typedef std::vector<std::string> Row;
+
     TextTable()
             : _horizontal('-'), _vertical('|'), _corner('+'), _has_ruler(true) {}
 
@@ -38,25 +41,27 @@ public:
 
     char horizontal() const { return _horizontal; }
 
-    void add(const std::string& content) { _current.push_back(content); }
+    void add(const std::string &content) { _current.push_back(content); }
 
     void endOfRow() {
         _rows.push_back(_current);
         _current.assign(0, "");
     }
 
-    template <typename Iterator> void addRow(Iterator begin, Iterator end) {
+    template<typename Iterator>
+    void addRow(Iterator begin, Iterator end) {
         for (auto i = begin; i != end; ++i) {
             add(*i);
         }
         endOfRow();
     }
 
-    template <typename Container> void addRow(const Container& container) {
+    template<typename Container>
+    void addRow(const Container &container) {
         addRow(container.begin(), container.end());
     }
 
-    const std::vector<Row>& rows() const { return _rows; }
+    const std::vector<Row> &rows() const { return _rows; }
 
     void setup() const {
         determineWidths();
@@ -78,7 +83,7 @@ public:
 
     bool has_ruler() const { return _has_ruler; }
 
-    int correctDistance(const std::string& string_to_correct) const {
+    int correctDistance(const std::string &string_to_correct) const {
         return static_cast<int>(string_to_correct.size()) -
                static_cast<int>(glyphLength(string_to_correct));
     };
@@ -104,22 +109,22 @@ private:
 
     unsigned columns() const { return _rows[0].size(); }
 
-    unsigned glyphLength(const std::string& s) const {
+    unsigned glyphLength(const std::string &s) const {
         unsigned int _byteLength = s.length();
 #ifdef TEXTTABLE_ENCODE_MULTIBYTE_STRINGS
-        #ifdef TEXTTABLE_USE_EN_US_UTF8
-    std::setlocale(LC_ALL, "en_US.utf8");
+#ifdef TEXTTABLE_USE_EN_US_UTF8
+        std::setlocale(LC_ALL, "en_US.utf8");
 #else
 #error You need to specify the encoding if the TextTable library uses multybyte string encoding!
 #endif
-    unsigned int u = 0;
-    const char *c_str = s.c_str();
-    unsigned _glyphLength = 0;
-    while (u < _byteLength) {
-      u += std::mblen(&c_str[u], _byteLength - u);
-      _glyphLength += 1;
-    }
-    return _glyphLength;
+        unsigned int u = 0;
+        const char *c_str = s.c_str();
+        unsigned _glyphLength = 0;
+        while (u < _byteLength) {
+          u += std::mblen(&c_str[u], _byteLength - u);
+          _glyphLength += 1;
+        }
+        return _glyphLength;
 #else
         return _byteLength;
 #endif
@@ -153,7 +158,7 @@ private:
     }
 };
 
-inline std::ostream &operator<<(std::ostream &stream, const TextTable& table) {
+inline std::ostream &operator<<(std::ostream &stream, const TextTable &table) {
     if (table.rows().empty()) {
         return stream;
     }

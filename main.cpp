@@ -1,8 +1,9 @@
+
+/**---Header-----**/
 #include <iostream>
 #include <vector>
-#include "TextTable.h"         //include
+#include "TextTable.h"
 #include "colors.h"
-#include <string.h>
 
 
 using namespace std;
@@ -10,10 +11,9 @@ using namespace std;
 struct Employee {
     string id;
     string name, job;
-    float basic_Salary; // jjho
+    float basic_Salary;
 
     /**----  declaration of struct Employee ---**/
-
     float it, epf, ma, hra, ta, gross, deduction, net_salary;
 };
 
@@ -96,7 +96,7 @@ int main() {
         cin.clear();
         cin.ignore();
         cout << FBLU("Do you wish to add another user? : ");
-        getline(cin,answer);
+        getline(cin, answer);
     } while (answer != "no");
 
     TextTable headerTable('-', '|', '+');
