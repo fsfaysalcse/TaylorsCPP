@@ -10,7 +10,7 @@ using namespace std;
 struct Employee {
     string id;
     string name, job;
-    float basic_Salary;
+    float basic_Salary; // jjho
 
     /**----  declaration of struct Employee ---**/
 
