@@ -1,7 +1,8 @@
 #include <iostream>
 #include <vector>
-#include "TextTable.h"
+#include "TextTable.h"         //include
 #include "colors.h"
+#include <string.h>
 
 
 using namespace std;
@@ -9,31 +10,31 @@ using namespace std;
 struct Employee {
     string id;
     string name, job;
-    double basic_Salary;
-    double it, epf, ma, hra, ta, gross, deduction, net_salary;
+    float basic_Salary;
+
+    /**----  declaration of struct Employee ---**/
+
+    float it, epf, ma, hra, ta, gross, deduction, net_salary;
 };
 
-double deduct(double z, double y) {
+/**---- deducts the given codes ---**/
+float deduct(float z, float y) {
     return z - y;
 }
 
-
+/**---- input of user ---**/
 Employee insertData() {
     Employee employee;
     cout << FGRN("Enter Employee ID : ");
-    cin >> employee.id;
+    getline(cin, employee.id);
     cout << FGRN("Enter Employee name : ");
-    cin >> employee.name;
+    getline(cin, employee.name);
     cout << FGRN("Enter Employee Job : ");
-    cin >> employee.job;
+    getline(cin, employee.job);
     cout << FGRN("Enter Employee basic salary : ");
     cin >> employee.basic_Salary;
 
-    /*employee.id = "123";
-    employee.name = "Faysal Hossain";
-    employee.job = "Android";
-    employee.basic_Salary = 500;*/
-
+    // calculation
     if (employee.basic_Salary <= 3000) {
         employee.it = employee.basic_Salary * 0.1;
         employee.hra = 300;
@@ -52,25 +53,32 @@ Employee insertData() {
     employee.epf = employee.basic_Salary * 0.12;
     employee.ma = 200;
 
-    cout << FGRN("How much do wish to reimburse  allowance? from 0 - 300 : ");
+    cout << FGRN("How much do wish to reimburse? ( max 300 RM ): ");
     cin >> employee.ta;
-    employee.ta = 150;
-    employee.ta = static_cast <double>(employee.ta);
-
-
     while (employee.ta > 300 || employee.ta < 0) {
-        cout << FGRN("Error please put in a number between 0 and 300 " << "\n");
+        cout << BOLD(FRED(" ERROR; please enter a number between 0 and 300 ")) << endl;  // validation
         cin >> employee.ta;
     }
 
+    employee.ta = static_cast <float>(employee.ta);
+
+
     employee.gross = employee.basic_Salary + employee.hra + employee.ma + employee.ta;
     employee.deduction = employee.it + employee.epf;
+    /**----  calculation for net salary ---**/
     employee.net_salary = deduct(employee.gross, employee.deduction);
 
     return employee;
 }
 
-void displayEmployee(Employee employee, TextTable &table);
+void displayEmployee(Employee employee, TextTable &table) {
+    table.add(employee.id);
+    table.add(employee.name);
+    table.add(employee.job);
+    table.add(to_string(employee.basic_Salary));
+    table.add(to_string(employee.net_salary));
+    table.endOfRow();
+}
 
 
 int main() {
@@ -84,13 +92,15 @@ int main() {
     do {
         Employee emp = insertData();
         empList.push_back(emp);
-
+        emp = {};
+        cin.clear();
+        cin.ignore();
         cout << FBLU("Do you wish to add another user? : ");
-        cin >> answer;
+        getline(cin,answer);
     } while (answer != "no");
 
     TextTable headerTable('-', '|', '+');
-    headerTable.add("  Here are the details of the Employee's Payroll  ");
+    headerTable.add("Employee's Payroll  Details ");
     headerTable.endOfRow();
     headerTable.setAlignment(2, TextTable::Alignment::RIGHT);
     cout << headerTable;
@@ -107,10 +117,10 @@ int main() {
         displayEmployee(emp, table);
     }
 
-    table.setAlignment(2, TextTable::Alignment::RIGHT);
+    table.setAlignment(0, TextTable::Alignment::RIGHT);
     cout << table;
 
-    cout << FBLU("Thank You") << endl;
+    cout << FYEL("Thank You") << endl;
     cout << BOLD(FBLU("Developed By - Faysal | Youssef | Rainaf | Atul")) << endl;
 
 
@@ -118,11 +128,3 @@ int main() {
 
 }
 
-void displayEmployee(Employee employee, TextTable &table) {
-    table.add(employee.id);
-    table.add(employee.name);
-    table.add(employee.job);
-    table.add(to_string(employee.basic_Salary));
-    table.add(to_string(employee.net_salary));
-    table.endOfRow();
-}
