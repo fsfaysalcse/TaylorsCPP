@@ -1,4 +1,4 @@
-/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/ninja -G Ninja -S /Users/fsfaysalcse/CLionProjects/taylorsC++Group -B /Users/fsfaysalcse/CLionProjects/taylorsC++Group/cmake-build-debug
+/private/var/folders/r6/m0zgy6fs2yv34kb23n6zvp680000gn/T/AppTranslocation/6DD6E5CB-BD6D-4406-8E66-198C9039E936/d/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" -S /Users/youssefabdelkader/CLionProjects/TaylorsCPPFinal -B /Users/youssefabdelkader/CLionProjects/TaylorsCPPFinal/cmake-build-debug
 -- Configuring done
 -- Generating done
--- Build files have been written to: /Users/fsfaysalcse/CLionProjects/taylorsC++Group/cmake-build-debug
+-- Build files have been written to: /Users/youssefabdelkader/CLionProjects/TaylorsCPPFinal/cmake-build-debug

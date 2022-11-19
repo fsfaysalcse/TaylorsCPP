@@ -7,13 +7,11 @@
 
 
 using namespace std;
-
+/**----  declaration of struct Employee ---**/
 struct Employee {
     string id;
     string name, job;
     float basic_Salary;
-
-    /**----  declaration of struct Employee ---**/
     float it, epf, ma, hra, ta, gross, deduction, net_salary;
 };
 
@@ -34,7 +32,7 @@ Employee insertData() {
     cout << FGRN("Enter Employee basic salary : ");
     cin >> employee.basic_Salary;
 
-    // calculation
+/**---- Calculation ---**/
     if (employee.basic_Salary <= 3000) {
         employee.it = employee.basic_Salary * 0.1;
         employee.hra = 300;
@@ -55,22 +53,22 @@ Employee insertData() {
 
     cout << FGRN("How much do wish to reimburse? ( max 300 RM ): ");
     cin >> employee.ta;
-    while (employee.ta > 300 || employee.ta < 0) {
-        cout << BOLD(FRED(" ERROR; please enter a number between 0 and 300 ")) << endl;  // validation
+    /**---- Validation ---**/
+    while (employee.ta > 300 || employee.ta <= 0) {
+        cout << BOLD(FRED(" ERROR; please enter a number between 0 and 300 ")) << endl;
         cin >> employee.ta;
     }
 
     employee.ta = static_cast <float>(employee.ta);
 
-
+    /**---- Calculation of Net salary ---**/
     employee.gross = employee.basic_Salary + employee.hra + employee.ma + employee.ta;
     employee.deduction = employee.it + employee.epf;
-    /**----  calculation for net salary ---**/
     employee.net_salary = deduct(employee.gross, employee.deduction);
 
     return employee;
 }
-
+/**---- Output function ---**/
 void displayEmployee(Employee employee, TextTable &table) {
     table.add(employee.id);
     table.add(employee.name);
@@ -80,7 +78,7 @@ void displayEmployee(Employee employee, TextTable &table) {
     table.endOfRow();
 }
 
-
+/**---- Main Function ---**/
 int main() {
     string answer;
     vector<Employee> empList;
@@ -95,10 +93,14 @@ int main() {
         emp = {};
         cin.clear();
         cin.ignore();
+
+        /**---- New user check ---**/
+
         cout << FBLU("Do you wish to add another user? : ");
         getline(cin, answer);
     } while (answer != "no");
 
+/**---- Output ---**/
     TextTable headerTable('-', '|', '+');
     headerTable.add("Employee's Payroll  Details ");
     headerTable.endOfRow();
