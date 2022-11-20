@@ -3,4 +3,4 @@ project(taylorsC__Group)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(taylorsC__Group main.cpp TextTable.h colors.h)
+add_executable(taylorsC__Group main.cpp)
