@@ -45,12 +45,10 @@ Employee calculation(Employee &employee) {
     cin >> employee.ta;
 
     /**---- Validation ---**/
-    while (employee.ta > 300 || employee.ta <= 0) {
+    while (employee.ta > 300 || employee.ta < 0) {
         cout << BOLD(FRED(" ERROR; please enter a number between 0 and 300 ")) << endl;
         cin >> employee.ta;
     }
-
-    employee.ta = static_cast <float>(employee.ta);
 
     /**---- Calculation of Net salary ---**/
     employee.gross = employee.basic_Salary + employee.hra + employee.ma + employee.ta;
@@ -85,11 +83,11 @@ void displayEmployee(Employee employee, TextTable &table) {
 
 /**---- Main Function ---**/
 int main() {
-    string answer;
+    string NewUser;
     vector<Employee> empList;
 
     cout << BOLD(FRED("Taylor's University")) << endl;
-    cout << FCYN("Employee Management SYSTEM") << endl;
+    cout << FCYN("Employee Management System") << endl;
     cout << FMAG("---------------------------") << endl;
 
     do {
@@ -101,8 +99,8 @@ int main() {
 
         /**---- New user check ---**/
         cout << FBLU("Do you wish to add another user? : ");
-        getline(cin, answer);
-    } while (answer != "no");
+        getline(cin, NewUser);
+    } while (NewUser != "no");
 
 /**---- Output ---**/
     TextTable headerTable('-', '|', '+');
